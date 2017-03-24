@@ -26,7 +26,12 @@ RabbitMQ学习环境：
 
 dos中查看消息情况：
     RabbitMQ Server\rabbitmq_server-3.6.8\sbin
-    >rabbitmqctl.bat list_queues
+    rabbitmqctl.bat list_queues
+
+windows services.msc
+
+参看https://www.cnblogs.com/alex3714/articles/5248247.html
+
 
 
 
