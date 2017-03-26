@@ -4,8 +4,10 @@
 import os
 import pika
 
+#部署rabbitMQ服务的IP、端口和用户账号及密码
 connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost'))
+    pika.ConnectionParameters( host='192.168.31.101', port=5672,virtual_host='/',
+    credentials=pika.PlainCredentials('test','123456')))
 
 channel = connection.channel()
 
@@ -17,7 +19,7 @@ queue_name = result.method.queue
 
 channel.queue_bind(exchange='direct_logs',
                    queue=queue_name,
-                   routing_key='192.168.0.2')
+                   routing_key='192.168.31.101')    #运行主机IP
 
 
 def request(ch, method, props, body):

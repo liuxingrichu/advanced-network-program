@@ -7,8 +7,10 @@ import pika
 
 class RpcClient(object):
     def __init__(self):
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(
-            host='localhost'))
+        self.connection = pika.BlockingConnection(
+            pika.ConnectionParameters( host='192.168.31.101', port=5672,virtual_host='/',
+            credentials=pika.PlainCredentials('test','123456')))
+
         self.channel = self.connection.channel()
         self.channel.exchange_declare(exchange='direct_logs',
                                       type='direct')
@@ -50,7 +52,7 @@ response_list = []
 response_dict = dict()
 
 while True:
-    cmd_str = input('>>').strip() or 'run "dir" --hosts 127.0.0.1 192.168.0.2'
+    cmd_str = input('>>').strip() or 'run "df -h" --hosts 192.168.31.101 192.168.31.100'
     if not cmd_str:
         continue
     # print(cmd_str)
