@@ -30,7 +30,7 @@ CentOS安装mysql
 	添加账号和登陆
 		#/usr/bin/mysqladmin -u root password root123　　设置mysql的root账号密码
 		#mysql -u root -p 登录数据库
-		#exit	退出数据库
+		mysql> exit	退出数据库
 
 	主要配置文件
 		/etc/my.cnf 主配置文件
@@ -50,7 +50,7 @@ CentOS安装mysql
 				   select_priv, insert_priv, update_priv)
 				   VALUES ('localhost', 'guest',
 				   PASSWORD('guest123'), 'Y', 'Y', 'Y');
-		 FLUSH PRIVILEGES;
+		mysql> FLUSH PRIVILEGES;
 		mysql> SELECT host, user, password FROM user WHERE user = 'guest';
 
 			选择要操作的Mysql数据库，使用该命令后所有Mysql命令都只针对该数据库。
@@ -67,6 +67,73 @@ CentOS安装mysql
 		mysql>drop database testdb;
 			显示数据表的详细索引信息，包括PRIMARY KEY（主键)
 		mysql>SHOW INDEX FROM 数据表;
+		
+		查看表结构
+		mysql> desc table_name;
+		查看表结构的创建记录
+		mysql> show create table table_name;
+		
+		插入数据表
+			语法
+			CREATE TABLE table_name (column_name column_type);
+			举例
+			mysql> create table student(
+			   stu_id INT NOT NULL AUTO_INCREMENT,
+			   name CHAR(32) NOT NULL,
+			   age  INT NOT NULL,
+			   register_date DATE,
+			   PRIMARY KEY ( stu_id )
+			);
+			
+		语法
+		select column_name from table_name [where (column_name condition)] [order by column_name desc] [group by column_name]
+		
+
+		查询
+			显示全部表信息	
+			mysql> select * from student;	*代表全部
+			从第2个位置，开始显示3条表信息
+			mysql> select * from student limit 3 offset 2;	
+			指定满足条件的表信息显示	
+			mysql> select * from student where register_date > '2016-03-05';	
+			模糊查询		
+			mysql> select * from student where name like "%Li";	 %代表任意字符，%Li表示name已Li结尾的全部满足条件
+
+		更新
+			更新满足条件的表信息
+			mysql> update student set age=20, name='Tom' where stu_id > 4;	
+			修改字段类型
+			mysql> alter table student modify age int(2);
+			修改字段名及类型
+			mysql> alter table student change age new_age int;
+			修改表名
+			mysql> alter table student rename to student_new;
+
+		添加
+			添加一列（数据元素）
+			mysql> alter table student add age int(3) not null;
+		
+		
+		删除
+			删除满足条件的表信息
+			mysql> delete from student where stu_id=6;	
+			删除一列（数据元素）
+			mysql> alter table student drop age;
+		
+		排序
+			对满足条件的表信息进行降序排序		
+			mysql> select * from student where name like "%Li" order by stu_id desc;	
+
+		分组统计
+			按照指定条件进行表信息统计
+			mysql> select name, count(*) from student group by name;	
+			按照指定条件进行表信息统计，同时统计整个数据
+			mysql> select coalesce(name,'total') as name, count(*)  as count from student group by name with rollup;		
+
+
+		外键
+			实现主键自增
+			mysql> alter table student2 modify id int auto_increment;
 
 
 python安装mysql
