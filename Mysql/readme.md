@@ -67,10 +67,11 @@ CentOS安装mysql
 		mysql>drop database testdb;
 			显示数据表的详细索引信息，包括PRIMARY KEY（主键)
 		mysql>SHOW INDEX FROM 数据表;
-		
-		查看表结构
+			删除表
+		mysql> drop table student;
+			查看表结构
 		mysql> desc table_name;
-		查看表结构的创建记录
+			查看表结构的创建记录
 		mysql> show create table table_name;
 		
 		插入数据表
@@ -131,14 +132,81 @@ CentOS安装mysql
 			mysql> select coalesce(name,'total') as name, count(*)  as count from student group by name with rollup;		
 
 
-		外键
-			实现主键自增
-			mysql> alter table student2 modify id int auto_increment;
-
-
+		外键（暂时验证无效）
+				实现主键自增
+			mysql> alter table student modify id int auto_increment;
+				创建student表
+			mysql> 
+				create table student(
+				id int(11) not null auto_increment,
+				name char(32) not null,
+				age int not null,
+				register_date date not null,
+				primary key (id));
+				创建study_record表
+			mysql> 
+				create table `study_record` (
+				`id` int(11) not null auto_increment,
+				`day` int not null,
+				`status` char(32) not null,
+				`stu_id` int(11) not null,
+				primary key (`id`),
+				key `fk_student_key` (`stu_id`),
+				constraint `fk_student_key` foreign key (`stu_id`) REFERENCES `student` (`id`)
+				);
+				向student表中插入信息
+			mysql> insert into student (name, age, register_date) values('Lucy', 19, '2017-04-02');
+				向study_record表中插入信息
+			mysql> insert into study_record (day, status, stu_id) values (1, 'Yes', 2);
+			
+		跨表查询
+			创建两表
+				mysql> create table A (a int not null);
+				mysql> create table B (b int not null);
+			插入数据
+				mysql> insert into A (a) values (1);
+				mysql> insert into A (a) values (2);
+				mysql> insert into A (a) values (3);
+				mysql> insert into A (a) values (4);
+				mysql> insert into B (b) values (3);
+				mysql> insert into B (b) values (4);
+				mysql> insert into B (b) values (5);
+				mysql> insert into B (b) values (6);
+			交集（两表中取两列相同的内容）
+				mysql> select * from A inner join B on A.a = B.b;
+				mysql> select A.*, B.* from A, B where A.a = B.b;
+			差集（先将A.a的内容全部打印，再找B.b中内容，存在NULL的表示两种的差集（A.a-B.b））
+				mysql> select * from A left join B on A.a = B.b;
+			差集（先将B.b的内容全部打印，再找A.a中内容，存在NULL的表示两种的差集（B.b-A.a））
+				mysql> select * from A right join B on A.a = B.b;
+			并集
+				mysql> select * from A right join B on A.a = B.b union select * from A left join B on A.a = B.b;
+				mysql> select * from A full join B on A.a = B.b;（mysql不支持）
+				
+		事务（暂时验证无效）
+			一般来说，事务是必须满足4个条件（ACID）： Atomicity（原子性）、Consistency（稳定性）、Isolation（隔离性）、Durability（可靠性）。
+			1、事务的原子性：一组事务，要么成功；要么撤回。
+			2、稳定性 ： 有非法数据（外键约束之类），事务撤回。
+			3、隔离性：事务独立运行。一个事务处理后的结果，影响了其他事务，那么其他事务会撤回。事务的100%隔离，需要牺牲速度。
+			4、可靠性：软、硬件崩溃后，InnoDB数据表驱动会利用日志文件重构修改。可靠性和高速度不可兼得， innodb_flush_log_at_trx_commit选项 决定什么时候吧事务保存到日志里。
+			mysql> begin;	开启事务
+			mysql> insert into student (name, age, register_date) values ('David', 12, '2017-04-6');
+			mysql> rollback;	撤回
+			mysql> commit;	确认提交，无法再撤回
+		
+		索引
+			查看索引
+				mysql> show index from student;
+			创建索引
+				CREATE INDEX indexName ON mytable(username(length)); 
+				mysql> create index index_name on student(name(32));
+			删除索引
+				mysql> drop index index_name on student;
+			
 python安装mysql
 	pip install pymysql
 	
 		
+参见https://www.cnblogs.com/alex3714/articles/5950372.html
 		
 		
