@@ -209,4 +209,40 @@ python安装mysql
 		
 参见https://www.cnblogs.com/alex3714/articles/5950372.html
 		
+授权Mysql远程访问
+	mysql> grant all on *.* to admin@'localhost' identified by 'password';
+	mysql> grant all on *.* to admin@'%' identified by 'password';
+	mysql> flush privileges;
+
+查看数据使用端口情况
+mysql> show global variables like 'port';
+
+	
+问题：pymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '192.168.***.***' (timed out)")	
+解决方法：
+	（1）关闭防火墙
+	（2）配置3306端口可以通过防火墙
+
+
+CentOS关闭防火墙
+	1、重启后永久性生效：
+	开启：chkconfig iptables on
+	关闭：chkconfig iptables off
+	2、即时生效，重启后失效：
+	开启：service iptables start
+	关闭：service iptables stop
+	3 查看防火墙状态
+	# service iptables status
 		
+Centos配置3306通过防火墙
+	#vim /etc/sysconfig/iptables
+	-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+	注：添加在22的下面
+	
+参看http://www.centoscn.com/CentOS/help/2014/1030/4021.html
+	
+
+查看用户清单
+	mysql> use mysql
+	mysql> select user, password, host from user;
+
