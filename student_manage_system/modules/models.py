@@ -16,6 +16,18 @@ teacher_m2m_class = Table('teacher_m2m_class', Base.metadata,
                                  ForeignKey('class.class_id'))
                           )
 
+# class Class_m2m_Student(Base):
+#     __tablename__ = 'class_m2m_student'
+#     id = Column(Integer, primary_key=True)
+#     class_id = Column(Integer, ForeignKey('class.class_id'))
+#     stu_id = Column(Integer, ForeignKey('student.stu_id'))
+#
+#     classes = relationship('Class', backref='class_m2m_student')
+#     students = relationship('Student', backref='class_m2m_student')
+#
+#     def __repr__(self):
+#         return '%s %s' % (self.classes, self.students)
+
 class_m2m_student = Table('class_m2m_student', Base.metadata,
                           Column('class_id', Integer,
                                  ForeignKey('class.class_id')),

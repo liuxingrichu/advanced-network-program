@@ -17,26 +17,27 @@ class Action(object):
 
     def func(self):
         while True:
-            print("\033[36;1m欢迎进入学员管理系统\n"
-                  "1 讲师视图\n"
+            print('\033[36;1m欢迎进入学员管理系统'.center(30, '-'))
+            print("1 讲师视图\n"
                   "2 学生视图\n"
-                  "q 退出管理系统\n\033[0m")
+                  "3 退出系统")
+            print('end\033[0m'.center(36, '-'))
             choice = input('请输入相关操作：').strip()
             if choice == '1':
                 TeacherCenter(self.session)
             elif choice == '2':
                 StudentCenter(self.session)
-            elif choice == 'q':
-                print('感谢使用学员管理系统，记着下次要来奥!')
+            elif choice == '3':
+                print('\t\033[32;1m感谢使用学员管理系统，记着下次要来奥!\033[0m')
                 break
             else:
                 print('\033[31;1m请输入正常选项\033[0m')
 
     def init_database(self):
-        rest = self.session.query(Teacher).filter(Teacher.teacher_id>0).all
+        rest = self.session.query(Teacher).filter(Teacher.teacher_id > 0).all
         if not rest:
             class1 = Class(class_name='s12', course='python')
-            teacher1 =Teacher(teacher_name='Tom')
+            teacher1 = Teacher(teacher_name='Tom')
             teacher1.classes = [class1]
 
             self.session.add_all([class1, teacher1])
