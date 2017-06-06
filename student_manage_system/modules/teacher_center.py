@@ -142,10 +142,10 @@ class TeacherCenter(object):
                         class_m2m_lesson_id=class_m2m_lesson_obj.id).first()
                     if not study_record_obj:
                         print("class_obj.students: ", class_obj.students)
-                        class_students = self.session.query(
-                            Class_m2m_Student).filter_by(
-                            class_name=class_name).all()
-                        print("class_students: ", class_students)
+                        # class_students = self.session.query(
+                        #     class_m2m_student).filter_by(
+                        #     class_name=class_name).all()
+                        # print("class_students: ", class_students)
                         for student_obj in class_obj.students:
                             status = input("输入学生 %s 的上课状态（yes/no）："
                                            % student_obj.stu_name)
@@ -241,6 +241,9 @@ class TeacherCenter(object):
             print("讲师：【%s】\t班级：【%s】\t类型：【%s】" % (
                 class_obj.teachers[0].teacher_name,
                 class_obj.class_name, class_obj.course))
+
+    def show_students(self):
+        pass
 
     def exit(self):
         exit()
