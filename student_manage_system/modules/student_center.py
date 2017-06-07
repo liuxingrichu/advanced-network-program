@@ -11,6 +11,7 @@ class StudentCenter(object):
         self.session = session
         self.authentication()
         self.handler()
+        self.student = None
 
     def handler(self):
         while True:
@@ -115,11 +116,15 @@ class StudentCenter(object):
                 print("\t\033[31;1m班级未创建\33[0m")
 
     def show_rank(self):
-        total_info = self.session.query(func.count(StudyRecord.stu_id),
-                                        func.sum(StudyRecord.score),
+        total_info = self.session.query(func.sum(StudyRecord.score),
                                         StudyRecord.stu_id). \
             group_by(StudyRecord.stu_id).all()
-        print(total_info)
+        list_sorted = sorted(total_info, key=lambda x: x[0], reverse=True)
+        for element in list_sorted:
+            if element[1] == self.student_obj.stu_id:
+                print('\t\033[32;1m学员: %s 排名：%s\033[0m' %
+                      (self.student_obj.stu_name,
+                       list_sorted.index(element) + 1))
 
     def exit(self):
         exit()
