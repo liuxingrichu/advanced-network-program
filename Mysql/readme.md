@@ -1,83 +1,73 @@
 
-³£ÓÃÊý¾Ý¿â£º
-Oracle      ¼×¹ÇÎÄ     ÊÕ·Ñ
-mysql       ¼×¹ÇÎÄ     Ãâ·Ñ¡¢¿ªÔ´
-SQL server  Î¢Èí
+å¸¸ç”¨æ•°æ®åº“ï¼š
+Oracle      ç”²éª¨æ–‡     æ”¶è´¹
+mysql       ç”²éª¨æ–‡     å…è´¹ã€å¼€æº
+SQL server  å¾®è½¯
 DB2         IBM
-postgresql            Ãâ·Ñ
-sqlite                ÇáÁ¿¼¶¡¢Ãâ·Ñ
-access                ÇáÁ¿¼¶
+postgresql            å…è´¹
+sqlite                è½»é‡çº§ã€å…è´¹
+access                è½»é‡çº§
 
-CentOS°²×°mysql
+CentOSå®‰è£…mysql
 
-    ²éÑ¯ÓëÐ¶ÔØ
-        #rpm -qa | grep mysql¡¡¡¡²é¿´²Ù×÷ÏµÍ³£¬ÊÇ·ñ°²×°mysqlÊý¾Ý¿â
-        #rpm -e mysql¡¡¡¡ÆÕÍ¨É¾³ýÄ£Ê½
-        Ç¿Á¦É¾³ýÄ£Ê½£¬Èç¹ûÊ¹ÓÃÉÏÃæÃüÁîÉ¾³ýÊ±£¬ÌáÊ¾ÓÐÒÀÀµµÄÆäËüÎÄ¼þ£¬
-        ÔòÓÃ¸ÃÃüÁî¿ÉÒÔ¶ÔÆä½øÐÐÇ¿Á¦É¾³ý
-        #rpm -e --nodeps mysql¡¡
+    æŸ¥è¯¢ä¸Žå¸è½½
+        #rpm -qa | grep mysqlã€€ã€€æŸ¥çœ‹æ“ä½œç³»ç»Ÿï¼Œæ˜¯å¦å®‰è£…mysqlæ•°æ®åº“
+        #rpm -e mysqlã€€ã€€æ™®é€šåˆ é™¤æ¨¡å¼
+        å¼ºåŠ›åˆ é™¤æ¨¡å¼ï¼Œå¦‚æžœä½¿ç”¨ä¸Šé¢å‘½ä»¤åˆ é™¤æ—¶ï¼Œæç¤ºæœ‰ä¾èµ–çš„å…¶å®ƒæ–‡ä»¶ï¼Œ
+        åˆ™ç”¨è¯¥å‘½ä»¤å¯ä»¥å¯¹å…¶è¿›è¡Œå¼ºåŠ›åˆ é™¤
+        #rpm -e --nodeps mysqlã€€
 		
-    ²é¿´Óë°²×°
-        #yum list | grep mysql ²é¿´Ìá¹©µÄmysqlÊý¾Ý¿â£¬¿ÉÏÂÔØµÄ°æ±¾
-        #yum install -y mysql-server mysql mysql-devel °²×°
-        #rpm -qi mysql-server ²é¿´°æ±¾
+    æŸ¥çœ‹ä¸Žå®‰è£…
+        #yum list | grep mysql æŸ¥çœ‹æä¾›çš„mysqlæ•°æ®åº“ï¼Œå¯ä¸‹è½½çš„ç‰ˆæœ¬
+        #yum install -y mysql-server mysql mysql-devel å®‰è£…
+        #rpm -qi mysql-server æŸ¥çœ‹ç‰ˆæœ¬
 		
-    ³õÊ¼»¯¼°Ïà¹ØÅäÖÃ
+    åˆå§‹åŒ–åŠç›¸å…³é…ç½®
         #service mysqld start
-        #chkconfig --list | grep mysqld ²é¿´ÊÇ·ñ¿ª»ú×ÔÆô¶¯
-        #chkconfig mysqld on ÉèÖÃ¿ª»úÆô¶¯
+        #chkconfig --list | grep mysqld æŸ¥çœ‹æ˜¯å¦å¼€æœºè‡ªå¯åŠ¨
+        #chkconfig mysqld on è®¾ç½®å¼€æœºå¯åŠ¨
 		
-	Ìí¼ÓÕËºÅºÍµÇÂ½
-		#/usr/bin/mysqladmin -u root password root123¡¡¡¡ÉèÖÃmysqlµÄrootÕËºÅÃÜÂë
-		#mysql -u root -p µÇÂ¼Êý¾Ý¿â
-		mysql> exit	ÍË³öÊý¾Ý¿â
+	æ·»åŠ è´¦å·å’Œç™»é™†
+		#/usr/bin/mysqladmin -u root password root123ã€€ã€€è®¾ç½®mysqlçš„rootè´¦å·å¯†ç 
+		#mysql -u root -p ç™»å½•æ•°æ®åº“
+		mysql> exit	é€€å‡ºæ•°æ®åº“
 
-	Ö÷ÒªÅäÖÃÎÄ¼þ
-		/etc/my.cnf Ö÷ÅäÖÃÎÄ¼þ
-		/var/lib/mysql   Êý¾Ý¿âÎÄ¼þ´æ·ÅÎ»ÖÃ
-		/var/log ÈÕÖ¾´æ·ÅÎ»ÖÃ
+	ä¸»è¦é…ç½®æ–‡ä»¶
+		/etc/my.cnf ä¸»é…ç½®æ–‡ä»¶
+		/var/lib/mysql   æ•°æ®åº“æ–‡ä»¶å­˜æ”¾ä½ç½®
+		/var/log æ—¥å¿—å­˜æ”¾ä½ç½®
 		
-	Êý¾Ý¿â¶Ë¿Ú
+	æ•°æ®åº“ç«¯å£
 		#netstat -anp| grep 3306 
 		
-	»ù±¾²Ù×÷
+	åŸºæœ¬æ“ä½œ
 		mysql> show databases;
-		mysql> create database [name];	´´½¨Êý¾Ý¿â
 		mysql> use [databasename];
 		mysql> show tables;
-		mysql> INSERT INTO user
-				  (host, user, password,
-				   select_priv, insert_priv, update_priv)
-				   VALUES ('localhost', 'guest',
-				   PASSWORD('guest123'), 'Y', 'Y', 'Y');
 		mysql> FLUSH PRIVILEGES;
 		mysql> SELECT host, user, password FROM user WHERE user = 'guest';
 
-			Ñ¡ÔñÒª²Ù×÷µÄMysqlÊý¾Ý¿â£¬Ê¹ÓÃ¸ÃÃüÁîºóËùÓÐMysqlÃüÁî¶¼Ö»Õë¶Ô¸ÃÊý¾Ý¿â¡£
-		mysql>USE Êý¾Ý¿âÃû;
-			ÁÐ³ö MySQL Êý¾Ý¿â¹ÜÀíÏµÍ³µÄÊý¾Ý¿âÁÐ±í¡£
+			é€‰æ‹©è¦æ“ä½œçš„Mysqlæ•°æ®åº“ï¼Œä½¿ç”¨è¯¥å‘½ä»¤åŽæ‰€æœ‰Mysqlå‘½ä»¤éƒ½åªé’ˆå¯¹è¯¥æ•°æ®åº“ã€‚
+		mysql>USE æ•°æ®åº“å;
+			åˆ—å‡º MySQL æ•°æ®åº“ç®¡ç†ç³»ç»Ÿçš„æ•°æ®åº“åˆ—è¡¨ã€‚
 		mysql>SHOW DATABASES;
-			ÏÔÊ¾Ö¸¶¨Êý¾Ý¿âµÄËùÓÐ±í£¬Ê¹ÓÃ¸ÃÃüÁîÇ°ÐèÒªÊ¹ÓÃ useÃüÁîÀ´Ñ¡ÔñÒª²Ù×÷µÄÊý¾Ý¿â¡£
+			æ˜¾ç¤ºæŒ‡å®šæ•°æ®åº“çš„æ‰€æœ‰è¡¨ï¼Œä½¿ç”¨è¯¥å‘½ä»¤å‰éœ€è¦ä½¿ç”¨ useå‘½ä»¤æ¥é€‰æ‹©è¦æ“ä½œçš„æ•°æ®åº“ã€‚
 		mysql>SHOW TABLES;
-			ÏÔÊ¾Êý¾Ý±íµÄÊôÐÔ£¬ÊôÐÔÀàÐÍ£¬Ö÷¼üÐÅÏ¢ £¬ÊÇ·ñÎª NULL£¬Ä¬ÈÏÖµµÈÆäËûÐÅÏ¢¡£
-		mysql>SHOW COLUMNS FROM Êý¾Ý±í;
-			´´½¨Ò»¸ö½ÐtestdbµÄÊý¾Ý¿â£¬ÇÒÈÃÆäÖ§³ÖÖÐÎÄ
+			æ˜¾ç¤ºæ•°æ®è¡¨çš„å±žæ€§ï¼Œå±žæ€§ç±»åž‹ï¼Œä¸»é”®ä¿¡æ¯ ï¼Œæ˜¯å¦ä¸º NULLï¼Œé»˜è®¤å€¼ç­‰å…¶ä»–ä¿¡æ¯ã€‚
+		mysql>SHOW COLUMNS FROM æ•°æ®è¡¨;
+			åˆ›å»ºä¸€ä¸ªå«testdbçš„æ•°æ®åº“ï¼Œä¸”è®©å…¶æ”¯æŒä¸­æ–‡
 		mysql>create database testdb charset "utf8";
-			É¾³ýÊý¾Ý¿â
-		mysql>drop database testdb;
-			ÏÔÊ¾Êý¾Ý±íµÄÏêÏ¸Ë÷ÒýÐÅÏ¢£¬°üÀ¨PRIMARY KEY£¨Ö÷¼ü)
-		mysql>SHOW INDEX FROM Êý¾Ý±í;
-			É¾³ý±í
-		mysql> drop table student;
-			²é¿´±í½á¹¹
+			æ˜¾ç¤ºæ•°æ®è¡¨çš„è¯¦ç»†ç´¢å¼•ä¿¡æ¯ï¼ŒåŒ…æ‹¬PRIMARY KEYï¼ˆä¸»é”®)
+		mysql>SHOW INDEX FROM æ•°æ®è¡¨;
+			æŸ¥çœ‹è¡¨ç»“æž„
 		mysql> desc table_name;
-			²é¿´±í½á¹¹µÄ´´½¨¼ÇÂ¼
+			æŸ¥çœ‹è¡¨ç»“æž„çš„åˆ›å»ºè®°å½•
 		mysql> show create table table_name;
 		
-		²åÈëÊý¾Ý±í
-			Óï·¨
+		æ’å…¥æ•°æ®è¡¨
+			è¯­æ³•
 			CREATE TABLE table_name (column_name column_type);
-			¾ÙÀý
+			ä¸¾ä¾‹
 			mysql> create table student(
 			   stu_id INT NOT NULL AUTO_INCREMENT,
 			   name CHAR(32) NOT NULL,
@@ -86,56 +76,63 @@ CentOS°²×°mysql
 			   PRIMARY KEY ( stu_id )
 			);
 			
-		Óï·¨
+		è¯­æ³•
 		select column_name from table_name [where (column_name condition)] [order by column_name desc] [group by column_name]
 		
 
-		²éÑ¯
-			ÏÔÊ¾È«²¿±íÐÅÏ¢	
-			mysql> select * from student;	*´ú±íÈ«²¿
-			´ÓµÚ2¸öÎ»ÖÃ£¬¿ªÊ¼ÏÔÊ¾3Ìõ±íÐÅÏ¢
+		æŸ¥è¯¢
+			æ˜¾ç¤ºå…¨éƒ¨è¡¨ä¿¡æ¯	
+			mysql> select * from student;	*ä»£è¡¨å…¨éƒ¨
+			ä»Žç¬¬2ä¸ªä½ç½®ï¼Œå¼€å§‹æ˜¾ç¤º3æ¡è¡¨ä¿¡æ¯
 			mysql> select * from student limit 3 offset 2;	
-			Ö¸¶¨Âú×ãÌõ¼þµÄ±íÐÅÏ¢ÏÔÊ¾	
+			æŒ‡å®šæ»¡è¶³æ¡ä»¶çš„è¡¨ä¿¡æ¯æ˜¾ç¤º	
 			mysql> select * from student where register_date > '2016-03-05';	
-			Ä£ºý²éÑ¯		
-			mysql> select * from student where name like "%Li";	 %´ú±íÈÎÒâ×Ö·û£¬%Li±íÊ¾nameÒÑLi½áÎ²µÄÈ«²¿Âú×ãÌõ¼þ
+			æ¨¡ç³ŠæŸ¥è¯¢		
+			mysql> select * from student where name like "%Li";	 %ä»£è¡¨ä»»æ„å­—ç¬¦ï¼Œ%Liè¡¨ç¤ºnameå·²Liç»“å°¾çš„å…¨éƒ¨æ»¡è¶³æ¡ä»¶
 
-		¸üÐÂ
-			¸üÐÂÂú×ãÌõ¼þµÄ±íÐÅÏ¢
+		æ›´æ–°
+			æ›´æ–°æ»¡è¶³æ¡ä»¶çš„è¡¨ä¿¡æ¯
 			mysql> update student set age=20, name='Tom' where stu_id > 4;	
-			ÐÞ¸Ä×Ö¶ÎÀàÐÍ
+			ä¿®æ”¹å­—æ®µç±»åž‹
 			mysql> alter table student modify age int(2);
-			ÐÞ¸Ä×Ö¶ÎÃû¼°ÀàÐÍ
+			ä¿®æ”¹å­—æ®µååŠç±»åž‹
 			mysql> alter table student change age new_age int;
-			ÐÞ¸Ä±íÃû
+			ä¿®æ”¹è¡¨å
 			mysql> alter table student rename to student_new;
 
-		Ìí¼Ó
-			Ìí¼ÓÒ»ÁÐ£¨Êý¾ÝÔªËØ£©
+		æ·»åŠ 
+			æ·»åŠ ä¸€åˆ—ï¼ˆæ•°æ®å…ƒç´ ï¼‰
 			mysql> alter table student add age int(3) not null;
+			mysql> create database [name];	åˆ›å»ºæ•°æ®åº“
+			mysql> insert into student (stu_name, QQ) values ('Tom', 123);
 		
 		
-		É¾³ý
-			É¾³ýÂú×ãÌõ¼þµÄ±íÐÅÏ¢
+		åˆ é™¤
+			åˆ é™¤æ»¡è¶³æ¡ä»¶çš„è¡¨ä¿¡æ¯
 			mysql> delete from student where stu_id=6;	
-			É¾³ýÒ»ÁÐ£¨Êý¾ÝÔªËØ£©
+			åˆ é™¤ä¸€åˆ—ï¼ˆæ•°æ®å…ƒç´ ï¼‰
 			mysql> alter table student drop age;
+			åˆ é™¤è¡¨
+			mysql> drop table student;
+			åˆ é™¤æ•°æ®åº“
+			mysql>drop database testdb;
+			
 		
-		ÅÅÐò
-			¶ÔÂú×ãÌõ¼þµÄ±íÐÅÏ¢½øÐÐ½µÐòÅÅÐò		
+		æŽ’åº
+			å¯¹æ»¡è¶³æ¡ä»¶çš„è¡¨ä¿¡æ¯è¿›è¡Œé™åºæŽ’åº		
 			mysql> select * from student where name like "%Li" order by stu_id desc;	
 
-		·Ö×éÍ³¼Æ
-			°´ÕÕÖ¸¶¨Ìõ¼þ½øÐÐ±íÐÅÏ¢Í³¼Æ
+		åˆ†ç»„ç»Ÿè®¡
+			æŒ‰ç…§æŒ‡å®šæ¡ä»¶è¿›è¡Œè¡¨ä¿¡æ¯ç»Ÿè®¡
 			mysql> select name, count(*) from student group by name;	
-			°´ÕÕÖ¸¶¨Ìõ¼þ½øÐÐ±íÐÅÏ¢Í³¼Æ£¬Í¬Ê±Í³¼ÆÕû¸öÊý¾Ý
+			æŒ‰ç…§æŒ‡å®šæ¡ä»¶è¿›è¡Œè¡¨ä¿¡æ¯ç»Ÿè®¡ï¼ŒåŒæ—¶ç»Ÿè®¡æ•´ä¸ªæ•°æ®
 			mysql> select coalesce(name,'total') as name, count(*)  as count from student group by name with rollup;		
 
 
-		Íâ¼ü£¨ÔÝÊ±ÑéÖ¤ÎÞÐ§£©
-				ÊµÏÖÖ÷¼ü×ÔÔö
+		å¤–é”®ï¼ˆæš‚æ—¶éªŒè¯æ— æ•ˆï¼‰
+				å®žçŽ°ä¸»é”®è‡ªå¢ž
 			mysql> alter table student modify id int auto_increment;
-				´´½¨student±í
+				åˆ›å»ºstudentè¡¨
 			mysql> 
 				create table student(
 				id int(11) not null auto_increment,
@@ -143,7 +140,7 @@ CentOS°²×°mysql
 				age int not null,
 				register_date date not null,
 				primary key (id));
-				´´½¨study_record±í
+				åˆ›å»ºstudy_recordè¡¨
 			mysql> 
 				create table `study_record` (
 				`id` int(11) not null auto_increment,
@@ -154,16 +151,16 @@ CentOS°²×°mysql
 				key `fk_student_key` (`stu_id`),
 				constraint `fk_student_key` foreign key (`stu_id`) REFERENCES `student` (`id`)
 				);
-				Ïòstudent±íÖÐ²åÈëÐÅÏ¢
+				å‘studentè¡¨ä¸­æ’å…¥ä¿¡æ¯
 			mysql> insert into student (name, age, register_date) values('Lucy', 19, '2017-04-02');
-				Ïòstudy_record±íÖÐ²åÈëÐÅÏ¢
+				å‘study_recordè¡¨ä¸­æ’å…¥ä¿¡æ¯
 			mysql> insert into study_record (day, status, stu_id) values (1, 'Yes', 2);
 			
-		¿ç±í²éÑ¯
-			´´½¨Á½±í
+		è·¨è¡¨æŸ¥è¯¢
+			åˆ›å»ºä¸¤è¡¨
 				mysql> create table A (a int not null);
 				mysql> create table B (b int not null);
-			²åÈëÊý¾Ý
+			æ’å…¥æ•°æ®
 				mysql> insert into A (a) values (1);
 				mysql> insert into A (a) values (2);
 				mysql> insert into A (a) values (3);
@@ -172,77 +169,84 @@ CentOS°²×°mysql
 				mysql> insert into B (b) values (4);
 				mysql> insert into B (b) values (5);
 				mysql> insert into B (b) values (6);
-			½»¼¯£¨Á½±íÖÐÈ¡Á½ÁÐÏàÍ¬µÄÄÚÈÝ£©
+			äº¤é›†ï¼ˆä¸¤è¡¨ä¸­å–ä¸¤åˆ—ç›¸åŒçš„å†…å®¹ï¼‰
 				mysql> select * from A inner join B on A.a = B.b;
 				mysql> select A.*, B.* from A, B where A.a = B.b;
-			²î¼¯£¨ÏÈ½«A.aµÄÄÚÈÝÈ«²¿´òÓ¡£¬ÔÙÕÒB.bÖÐÄÚÈÝ£¬´æÔÚNULLµÄ±íÊ¾Á½ÖÖµÄ²î¼¯£¨A.a-B.b£©£©
+			å·®é›†ï¼ˆå…ˆå°†A.açš„å†…å®¹å…¨éƒ¨æ‰“å°ï¼Œå†æ‰¾B.bä¸­å†…å®¹ï¼Œå­˜åœ¨NULLçš„è¡¨ç¤ºä¸¤ç§çš„å·®é›†ï¼ˆA.a-B.bï¼‰ï¼‰
 				mysql> select * from A left join B on A.a = B.b;
-			²î¼¯£¨ÏÈ½«B.bµÄÄÚÈÝÈ«²¿´òÓ¡£¬ÔÙÕÒA.aÖÐÄÚÈÝ£¬´æÔÚNULLµÄ±íÊ¾Á½ÖÖµÄ²î¼¯£¨B.b-A.a£©£©
+			å·®é›†ï¼ˆå…ˆå°†B.bçš„å†…å®¹å…¨éƒ¨æ‰“å°ï¼Œå†æ‰¾A.aä¸­å†…å®¹ï¼Œå­˜åœ¨NULLçš„è¡¨ç¤ºä¸¤ç§çš„å·®é›†ï¼ˆB.b-A.aï¼‰ï¼‰
 				mysql> select * from A right join B on A.a = B.b;
-			²¢¼¯
+			å¹¶é›†
 				mysql> select * from A right join B on A.a = B.b union select * from A left join B on A.a = B.b;
-				mysql> select * from A full join B on A.a = B.b;£¨mysql²»Ö§³Ö£©
+				mysql> select * from A full join B on A.a = B.b;ï¼ˆmysqlä¸æ”¯æŒï¼‰
 				
-		ÊÂÎñ£¨ÔÝÊ±ÑéÖ¤ÎÞÐ§£©
-			Ò»°ãÀ´Ëµ£¬ÊÂÎñÊÇ±ØÐëÂú×ã4¸öÌõ¼þ£¨ACID£©£º Atomicity£¨Ô­×ÓÐÔ£©¡¢Consistency£¨ÎÈ¶¨ÐÔ£©¡¢Isolation£¨¸ôÀëÐÔ£©¡¢Durability£¨¿É¿¿ÐÔ£©¡£
-			1¡¢ÊÂÎñµÄÔ­×ÓÐÔ£ºÒ»×éÊÂÎñ£¬ÒªÃ´³É¹¦£»ÒªÃ´³·»Ø¡£
-			2¡¢ÎÈ¶¨ÐÔ £º ÓÐ·Ç·¨Êý¾Ý£¨Íâ¼üÔ¼ÊøÖ®Àà£©£¬ÊÂÎñ³·»Ø¡£
-			3¡¢¸ôÀëÐÔ£ºÊÂÎñ¶ÀÁ¢ÔËÐÐ¡£Ò»¸öÊÂÎñ´¦ÀíºóµÄ½á¹û£¬Ó°ÏìÁËÆäËûÊÂÎñ£¬ÄÇÃ´ÆäËûÊÂÎñ»á³·»Ø¡£ÊÂÎñµÄ100%¸ôÀë£¬ÐèÒªÎþÉüËÙ¶È¡£
-			4¡¢¿É¿¿ÐÔ£ºÈí¡¢Ó²¼þ±ÀÀ£ºó£¬InnoDBÊý¾Ý±íÇý¶¯»áÀûÓÃÈÕÖ¾ÎÄ¼þÖØ¹¹ÐÞ¸Ä¡£¿É¿¿ÐÔºÍ¸ßËÙ¶È²»¿É¼æµÃ£¬ innodb_flush_log_at_trx_commitÑ¡Ïî ¾ö¶¨Ê²Ã´Ê±ºò°ÉÊÂÎñ±£´æµ½ÈÕÖ¾Àï¡£
-			mysql> begin;	¿ªÆôÊÂÎñ
+		äº‹åŠ¡ï¼ˆæš‚æ—¶éªŒè¯æ— æ•ˆï¼‰
+			ä¸€èˆ¬æ¥è¯´ï¼Œäº‹åŠ¡æ˜¯å¿…é¡»æ»¡è¶³4ä¸ªæ¡ä»¶ï¼ˆACIDï¼‰ï¼š Atomicityï¼ˆåŽŸå­æ€§ï¼‰ã€Consistencyï¼ˆç¨³å®šæ€§ï¼‰ã€Isolationï¼ˆéš”ç¦»æ€§ï¼‰ã€Durabilityï¼ˆå¯é æ€§ï¼‰ã€‚
+			1ã€äº‹åŠ¡çš„åŽŸå­æ€§ï¼šä¸€ç»„äº‹åŠ¡ï¼Œè¦ä¹ˆæˆåŠŸï¼›è¦ä¹ˆæ’¤å›žã€‚
+			2ã€ç¨³å®šæ€§ ï¼š æœ‰éžæ³•æ•°æ®ï¼ˆå¤–é”®çº¦æŸä¹‹ç±»ï¼‰ï¼Œäº‹åŠ¡æ’¤å›žã€‚
+			3ã€éš”ç¦»æ€§ï¼šäº‹åŠ¡ç‹¬ç«‹è¿è¡Œã€‚ä¸€ä¸ªäº‹åŠ¡å¤„ç†åŽçš„ç»“æžœï¼Œå½±å“äº†å…¶ä»–äº‹åŠ¡ï¼Œé‚£ä¹ˆå…¶ä»–äº‹åŠ¡ä¼šæ’¤å›žã€‚äº‹åŠ¡çš„100%éš”ç¦»ï¼Œéœ€è¦ç‰ºç‰²é€Ÿåº¦ã€‚
+			4ã€å¯é æ€§ï¼šè½¯ã€ç¡¬ä»¶å´©æºƒåŽï¼ŒInnoDBæ•°æ®è¡¨é©±åŠ¨ä¼šåˆ©ç”¨æ—¥å¿—æ–‡ä»¶é‡æž„ä¿®æ”¹ã€‚å¯é æ€§å’Œé«˜é€Ÿåº¦ä¸å¯å…¼å¾—ï¼Œ innodb_flush_log_at_trx_commité€‰é¡¹ å†³å®šä»€ä¹ˆæ—¶å€™å§äº‹åŠ¡ä¿å­˜åˆ°æ—¥å¿—é‡Œã€‚
+			mysql> begin;	å¼€å¯äº‹åŠ¡
 			mysql> insert into student (name, age, register_date) values ('David', 12, '2017-04-6');
-			mysql> rollback;	³·»Ø
-			mysql> commit;	È·ÈÏÌá½»£¬ÎÞ·¨ÔÙ³·»Ø
+			mysql> rollback;	æ’¤å›ž
+			mysql> commit;	ç¡®è®¤æäº¤ï¼Œæ— æ³•å†æ’¤å›ž
 		
-		Ë÷Òý
-			²é¿´Ë÷Òý
+		ç´¢å¼•
+			æŸ¥çœ‹ç´¢å¼•
 				mysql> show index from student;
-			´´½¨Ë÷Òý
+			åˆ›å»ºç´¢å¼•
 				CREATE INDEX indexName ON mytable(username(length)); 
 				mysql> create index index_name on student(name(32));
-			É¾³ýË÷Òý
+			åˆ é™¤ç´¢å¼•
 				mysql> drop index index_name on student;
 			
-python°²×°mysql
+pythonå®‰è£…mysql
 	pip install pymysql
 	
 		
-²Î¼ûhttps://www.cnblogs.com/alex3714/articles/5950372.html
+å‚è§https://www.cnblogs.com/alex3714/articles/5950372.html
 		
-ÊÚÈ¨MysqlÔ¶³Ì·ÃÎÊ
+æŽˆæƒMysqlè¿œç¨‹è®¿é—®
 	mysql> grant all on *.* to admin@'localhost' identified by 'password';
 	mysql> grant all on *.* to admin@'%' identified by 'password';
 	mysql> flush privileges;
 
-²é¿´Êý¾ÝÊ¹ÓÃ¶Ë¿ÚÇé¿ö
+æŸ¥çœ‹æ•°æ®ä½¿ç”¨ç«¯å£æƒ…å†µ
 mysql> show global variables like 'port';
 
 	
-ÎÊÌâ£ºpymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '192.168.***.***' (timed out)")	
-½â¾ö·½·¨£º
-	£¨1£©¹Ø±Õ·À»ðÇ½
-	£¨2£©ÅäÖÃ3306¶Ë¿Ú¿ÉÒÔÍ¨¹ý·À»ðÇ½
+é—®é¢˜ï¼špymysql.err.OperationalError: (2003, "Can't connect to MySQL server on '192.168.***.***' (timed out)")	
+è§£å†³æ–¹æ³•ï¼š
+	ï¼ˆ1ï¼‰å…³é—­é˜²ç«å¢™
+	ï¼ˆ2ï¼‰é…ç½®3306ç«¯å£å¯ä»¥é€šè¿‡é˜²ç«å¢™
 
 
-CentOS¹Ø±Õ·À»ðÇ½
-	1¡¢ÖØÆôºóÓÀ¾ÃÐÔÉúÐ§£º
-	¿ªÆô£ºchkconfig iptables on
-	¹Ø±Õ£ºchkconfig iptables off
-	2¡¢¼´Ê±ÉúÐ§£¬ÖØÆôºóÊ§Ð§£º
-	¿ªÆô£ºservice iptables start
-	¹Ø±Õ£ºservice iptables stop
-	3 ²é¿´·À»ðÇ½×´Ì¬
+CentOSå…³é—­é˜²ç«å¢™
+	1ã€é‡å¯åŽæ°¸ä¹…æ€§ç”Ÿæ•ˆï¼š
+	å¼€å¯ï¼šchkconfig iptables on
+	å…³é—­ï¼šchkconfig iptables off
+	2ã€å³æ—¶ç”Ÿæ•ˆï¼Œé‡å¯åŽå¤±æ•ˆï¼š
+	å¼€å¯ï¼šservice iptables start
+	å…³é—­ï¼šservice iptables stop
+	3 æŸ¥çœ‹é˜²ç«å¢™çŠ¶æ€
 	# service iptables status
 		
-CentosÅäÖÃ3306Í¨¹ý·À»ðÇ½
+Centosé…ç½®3306é€šè¿‡é˜²ç«å¢™
 	#vim /etc/sysconfig/iptables
 	-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
-	×¢£ºÌí¼ÓÔÚ22µÄÏÂÃæ
+	æ³¨ï¼šæ·»åŠ åœ¨22çš„ä¸‹é¢
 	
-²Î¿´http://www.centoscn.com/CentOS/help/2014/1030/4021.html
+å‚çœ‹http://www.centoscn.com/CentOS/help/2014/1030/4021.html
 	
 
-²é¿´ÓÃ»§Çåµ¥
+æŸ¥çœ‹ç”¨æˆ·æ¸…å•
 	mysql> use mysql
 	mysql> select user, password, host from user;
 
+æ·»åŠ ç”¨æˆ·
+mysql> use mysql;
+mysql> INSERT INTO user
+	  (host, user, password,
+	   select_priv, insert_priv, update_priv)
+	   VALUES ('localhost', 'admin',
+	   PASSWORD('123'), 'Y', 'Y', 'Y');
