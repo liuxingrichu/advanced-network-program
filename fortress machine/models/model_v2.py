@@ -5,30 +5,29 @@ from sqlalchemy import Column, Integer, String, Enum, ForeignKey, \
     UniqueConstraint, Table
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from sqlalchemy import create_engine
 from sqlalchemy_utils import ChoiceType, PasswordType
 
 Base = declarative_base()
 
 bindhost_m2m_hostgroup = Table('bindhost_m2m_hostgroup', Base.metadata,
                                Column('bindhost_id', Integer,
-                                      ForeignKey('bindhost.id')),
+                                      ForeignKey('bind_host.id')),
                                Column('hostgroup_id', Integer,
-                                      ForeignKey('hostgroup.id'))
+                                      ForeignKey('host_group.id'))
                                )
 
-user_m2m_bindhost = Table('user_m2m_bindhost', Base.metadate,
+user_m2m_bindhost = Table('user_m2m_bindhost', Base.metadata,
                           Column('fortress_user_id', Integer,
-                                 ForeignKey('fortress_user_id')),
+                                 ForeignKey('fortress_user.id')),
                           Column('bindhost_id', Integer,
-                                 ForeignKey('bindhost_id'))
+                                 ForeignKey('bind_host.id'))
                           )
 
 user_m2m_hostgroup = Table('user_m2m_hostgroup', Base.metadata,
                            Column('fortress_user_id', Integer,
                                   ForeignKey('fortress_user.id')),
                            Column('hostgroup_id', Integer,
-                                  ForeignKey('hostgroup.id'))
+                                  ForeignKey('host_group.id'))
                            )
 
 
@@ -39,8 +38,8 @@ class BindHost(Base):
     '''
     __tablename__ = 'bind_host'
     # 联合唯一
-    __table_args__ = (UniqueConstraint('host_id', 'group_id', 'remoteuser_id',
-                                       name='_host_group_remoteuser_uc'),)
+    __table_args__ = (UniqueConstraint('host_id', 'remoteuser_id',
+                                       name='_host_remoteuser_uc'),)
     id = Column(Integer, primary_key=True)
     host_id = Column(Integer, ForeignKey('host.id'))
     remoteuser_id = Column(Integer, ForeignKey('remote_user.id'))
@@ -49,9 +48,8 @@ class BindHost(Base):
     remote_user = relationship('RemoteUser', backref='bind_remote_users')
 
     def __repr__(self):
-        return '<%s -- %s -- %s>' % (self.host.id,
-                                     self.group.name,
-                                     self.remote_user.username)
+        return '<%s -- %s>' % (self.host.id,
+                               self.remote_user.username)
 
 
 class Host(Base):
@@ -70,7 +68,7 @@ class HostGroup(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(64), unique=True)
     bind_hosts = relationship('BindHost', secondary='bindhost_m2m_hostgroup',
-                              backref='')
+                              backref='hostgroups')
 
     def __repr__(self):
         return self.name
@@ -109,5 +107,5 @@ class FortressUser(Base):
         return self.username
 
 
-class AuditLog(Base):
-    pass
+# class AuditLog(Base):
+#     pass
