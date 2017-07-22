@@ -53,7 +53,69 @@ def create_remoteusers(argvs):
         for key, val in source.items():
             print(key, val)
             obj = model_v2.RemoteUser(username=val.get('username'),
-                                    auth_type=val.get('auth_type'),
-                                    password=val.get('password'))
+                                      auth_type=val.get('auth_type'),
+                                      password=val.get('password'))
+            session.add(obj)
+        session.commit()
+
+
+def create_fortressusers(argvs):
+    '''
+    create fortress machine access user
+    :param argvs:
+    :return:
+    '''
+    if '-f' in argvs:
+        user_file = argvs[argvs.index("-f") + 1]
+    else:
+        print_err(
+            "invalid usage, should be:\ncreate_fortressusers -f <the new users file>",
+            quit=True)
+
+    source = yaml_parser(user_file)
+    if source:
+        for key, val in source.items():
+            print(key, val)
+            obj = model_v2.FortressUser(username=key,
+                                        password=val.get('password'))
+            # if val.get('groups'):
+            #     groups = session.query(models.Group).filter(
+            #         model_v2.Group.name.in_(val.get('groups'))).all()
+            #     if not groups:
+            #         print_err("none of [%s] exist in group table." % val.get(
+            #             'groups'), quit=True)
+            #     obj.groups = groups
+            # if val.get('bind_hosts'):
+            #     bind_hosts = common_filters.bind_hosts_filter(val)
+            #     obj.bind_hosts = bind_hosts
+            # print(obj)
+            session.add(obj)
+        session.commit()
+
+
+def create_groups(argvs):
+    '''
+    create groups
+    :param argvs:
+    :return:
+    '''
+    if '-f' in argvs:
+        group_file = argvs[argvs.index("-f") + 1]
+    else:
+        print_err(
+            "invalid usage, should be:\ncreategroups -f <the new groups file>",
+            quit=True)
+    source = yaml_parser(group_file)
+    if source:
+        for key, val in source.items():
+            print(key, val)
+            obj = model_v2.HostGroup(name=key)
+            # if val.get('bind_hosts'):
+            #     bind_hosts = common_filters.bind_hosts_filter(val)
+            #     obj.bind_hosts = bind_hosts
+            #
+            # if val.get('user_profiles'):
+            #     user_profiles = common_filters.user_profiles_filter(val)
+            #     obj.user_profiles = user_profiles
             session.add(obj)
         session.commit()

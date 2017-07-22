@@ -18,6 +18,8 @@ pycharm运行参数
     syncdb
     create_hosts -f ..\share\examples\new_hosts.yml
     create_remoteusers -f ..\share\examples\new_remoteusers.yml
+    create_fortressusers -f ..\share\examples\new_fortressusers.yml
+    create_groups -f ..\share\examples\new_groups.yml
 
 
 查看数据
