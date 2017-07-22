@@ -10,3 +10,12 @@ mysql> drop database JPdb;
 查看表结构
 mysql> desc remote_user;
 
+安装yaml包
+pip install pyyaml
+
+pycharm运行参数
+    create_hosts -f ..\share\examples\new_hosts.yml
+
+查看数据
+mysql> select * from host;
+
