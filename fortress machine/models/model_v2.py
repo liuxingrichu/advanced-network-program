@@ -78,16 +78,17 @@ class RemoteUser(Base):
     __tablename__ = 'remote_user'
     # 联合唯一
     __table_args__ = (UniqueConstraint('auth_type', 'username', 'password',
-                                       name='_user_passwd_uc'),)
+                                       name='type_user_passwd_uc'),)
 
     id = Column(Integer, primary_key=True)
     AuthTypes = [
         ('ssh-password', 'SSH/Password'),
         ('ssh-type', 'SSH/KEY'),
     ]
-    auth_type = Column(String(64), ChoiceType(AuthTypes))
-    username = Column(String(64))
-    password = Column(String(128))
+    # 联合唯一的数据内容必须为非空
+    auth_type = Column(String(64), ChoiceType(AuthTypes),nullable=False)
+    username = Column(String(64), nullable=False)
+    password = Column(String(128),nullable=False)
 
     def __repr__(self):
         return self.username

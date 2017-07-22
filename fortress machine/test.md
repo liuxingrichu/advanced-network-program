@@ -14,8 +14,15 @@ mysql> desc remote_user;
 pip install pyyaml
 
 pycharm运行参数
+    无
+    syncdb
     create_hosts -f ..\share\examples\new_hosts.yml
+    create_remoteusers -f ..\share\examples\new_remoteusers.yml
+
 
 查看数据
 mysql> select * from host;
+
+删除指定数据
+mysql> delete from remote_user where auth_type like 'ssh-passwd';
 
