@@ -85,7 +85,7 @@ class RemoteUser(Base):
         ('ssh-password', 'SSH/Password'),
         ('ssh-type', 'SSH/KEY'),
     ]
-    auth_type = Column(ChoiceType(AuthTypes))
+    auth_type = Column(String(64), ChoiceType(AuthTypes))
     username = Column(String(64))
     password = Column(String(128))
 
@@ -105,7 +105,6 @@ class FortressUser(Base):
 
     def __repr__(self):
         return self.username
-
 
 # class AuditLog(Base):
 #     pass

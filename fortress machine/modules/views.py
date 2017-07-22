@@ -9,5 +9,7 @@ from conf import settings
 
 def syncdb(argvs):
     print("Syncing DB....")
-    engine = create_engine(settings.ConnParams, echo=True)
+    engine = create_engine(settings.ConnParams,
+                           # echo=True
+                           )
     model_v2.Base.metadata.create_all(engine) #创建所有表结构
