@@ -119,3 +119,63 @@ def create_groups(argvs):
             #     obj.user_profiles = user_profiles
             session.add(obj)
         session.commit()
+
+
+def create_bindhosts(argvs):
+    '''
+    create bind hosts
+    :param argvs:
+    :return:
+    '''
+    if '-f' in argvs:
+        bindhosts_file = argvs[argvs.index("-f") + 1]
+    else:
+        print_err(
+            "invalid usage, should be:\ncreate_bindhosts -f <the new bindhosts file>",
+            quit=True)
+    source = yaml_parser(bindhosts_file)
+    if source:
+        for key, val in source.items():
+            # print(key,val)
+            host_obj = session.query(model_v2.Host).filter(
+                model_v2.Host.hostname == val.get('hostname')).first()
+            assert host_obj
+            for item in val['remote_users']:
+                print(item)
+                assert item.get('auth_type')
+                if item.get('auth_type') == 'ssh-password':
+                    remoteuser_obj = session.query(model_v2.RemoteUser).filter(
+                        model_v2.RemoteUser.username == item.get('username'),
+                        model_v2.RemoteUser.password == item.get('password')
+                    ).first()
+                else:
+                    remoteuser_obj = session.query(model_v2.RemoteUser).filter(
+                        model_v2.RemoteUser.username == item.get('username'),
+                        model_v2.RemoteUser.auth_type == item.get('auth_type'),
+                    ).first()
+                if not remoteuser_obj:
+                    print_err("RemoteUser obj %s does not exist." % item,
+                              quit=True)
+                bindhost_obj = model_v2.BindHost(host_id=host_obj.id,
+                                                 remoteuser_id=remoteuser_obj.id)
+                session.add(bindhost_obj)
+                # for groups this host binds to
+                if source[key].get('groups'):
+                    group_objs = session.query(model_v2.HostGroup).filter(
+                        model_v2.HostGroup.name.in_(
+                            source[key].get('groups'))).all()
+                    assert group_objs
+                    print('groups:', group_objs)
+                    bindhost_obj.hostgroups = group_objs
+                # for user_profiles this host binds to
+                if source[key].get('fortress_user'):
+                    fortressuser_objs = session.query(
+                        model_v2.FortressUser).filter(
+                        model_v2.FortressUser.username.in_(
+                            source[key].get('fortress_user')
+                        )).all()
+                    assert fortressuser_objs
+                    print("fortressuser:", fortressuser_objs)
+                    bindhost_obj.fortress_users = fortressuser_objs
+                    # print(bindhost_obj)
+        session.commit()

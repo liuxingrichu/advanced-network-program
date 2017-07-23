@@ -20,11 +20,12 @@ pycharm运行参数
     create_remoteusers -f ..\share\examples\new_remoteusers.yml
     create_fortressusers -f ..\share\examples\new_fortressusers.yml
     create_groups -f ..\share\examples\new_groups.yml
-
+    create_bindhosts -f ..\share\examples\new_bindhosts.yml
 
 查看数据
 mysql> select * from host;
 
 删除指定数据
 mysql> delete from remote_user where auth_type like 'ssh-passwd';
+mysql> delete from bindhost_m2m_hostgroup where bindhost_id > 0;
 

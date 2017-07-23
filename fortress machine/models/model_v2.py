@@ -33,8 +33,8 @@ user_m2m_hostgroup = Table('user_m2m_hostgroup', Base.metadata,
 
 class BindHost(Base):
     '''
-    192.168.1.10 web bj_group
-    192.168.1.11 mysql sh_group
+    192.168.1.10 web
+    192.168.1.11 mysql
     '''
     __tablename__ = 'bind_host'
     # 联合唯一

@@ -1,11 +1,11 @@
 
 user0:
-  auth_type:  ssh-passwd
+  auth_type:  ssh-password
   username: root
   password: abc!23
 
 user1:
-  auth_type:  ssh-passwd
+  auth_type:  ssh-password
   username: root
   password: alex!34321df
 
@@ -15,6 +15,6 @@ user2:
   password: abc!23
 
 user3:
-  auth_type:  ssh-passwd
+  auth_type:  ssh-password
   username: alex
   password: alex3714
