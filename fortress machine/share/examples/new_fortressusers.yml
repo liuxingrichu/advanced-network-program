@@ -1,18 +1,18 @@
 
 alex:
   password: alex123
-#  groups:
-#    - web_servers
-#    - db_servers
-  #bind_hosts:
-  #  - h1
-  #  - h2
-  #  - h3
+  groups:
+    - sh_group
+    - bj_group
+  bind_hosts:
+    - ubuntu test
+    - server2
+    - server1
 jack:
   password: jack123
 
 rain:
   password: rain123
-  #bind_hosts:
-  #  - h1
-  #  - h3
+  bind_hosts:
+    - ubuntu test
+    - server2
