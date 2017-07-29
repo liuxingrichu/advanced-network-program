@@ -19,8 +19,9 @@ pycharm运行参数
     create_hosts -f ..\share\examples\new_hosts.yml
     create_remoteusers -f ..\share\examples\new_remoteusers.yml
     create_groups -f ..\share\examples\new_groups.yml
-    create_fortressusers -f ..\share\examples\new_fortressusers.yml
     create_bindhosts -f ..\share\examples\new_bindhosts.yml
+    create_fortressusers -f ..\share\examples\new_fortressusers.yml
+    start_session
 
 查看数据
 mysql> select * from host;

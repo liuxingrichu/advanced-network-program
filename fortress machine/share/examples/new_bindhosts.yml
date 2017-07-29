@@ -12,9 +12,9 @@ bind1:
       password: alex3714
   groups:
     - bj_group
-  fortress_user:
-    - alex
-    - jack
+#  fortress_user:
+#    - alex
+#    - jack
 
 bind2:
   hostname: server2
@@ -26,6 +26,14 @@ bind2:
   groups:
     - bj_group
     - sh_group
+#
+#  fortress_user:
+#    - rain
 
-  fortress_user:
-    - rain
+bind3:
+  hostname: server1
+  remote_users:
+    - user1:
+      username: root
+      auth_type: ssh-password
+      password: abc!23

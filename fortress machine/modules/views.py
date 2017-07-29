@@ -182,99 +182,99 @@ def create_bindhosts(argvs):
         session.commit()
 
 
-# def auth():
-#     '''
-#     do the user login authentication
-#     :return:
-#     '''
-#     count = 0
-#     while count < 3:
-#         username = input("\033[32;1mUsername:\033[0m").strip()
-#         if len(username) == 0: continue
-#         password = input("\033[32;1mPassword:\033[0m").strip()
-#         if len(password) == 0: continue
-#         user_obj = session.query(models.UserProfile).filter(
-#             models.UserProfile.username == username,
-#             models.UserProfile.password == password).first()
-#         if user_obj:
-#             return user_obj
-#         else:
-#             print("wrong username or password, you have %s more chances." % (
-#             3 - count - 1))
-#             count += 1
-#     else:
-#         print_err("too many attempts.")
-#
-#
-# def welcome_msg(user):
-#     WELCOME_MSG = '''\033[32;1m
-#     ------------- Welcome [%s] login LittleFinger -------------
-#     \033[0m''' % user.username
-#     print(WELCOME_MSG)
-#
-#
-# def start_session(argvs):
-#     print('going to start sesssion ')
-#     user = auth()
-#     if user:
-#         welcome_msg(user)
-#         print(user.bind_hosts)
-#         print(user.groups)
-#         exit_flag = False
-#         while not exit_flag:
-#             if user.bind_hosts:
-#                 print('\033[32;1mz.\tungroupped hosts (%s)\033[0m' % len(
-#                     user.bind_hosts))
-#             for index, group in enumerate(user.groups):
-#                 print('\033[32;1m%s.\t%s (%s)\033[0m' % (
-#                 index, group.name, len(group.bind_hosts)))
-#
-#             choice = input("[%s]:" % user.username).strip()
-#             if len(choice) == 0: continue
-#             if choice == 'z':
-#                 print("------ Group: ungroupped hosts ------")
-#                 for index, bind_host in enumerate(user.bind_hosts):
-#                     print("  %s.\t%s@%s(%s)" % (index,
-#                                                 bind_host.remoteuser.username,
-#                                                 bind_host.host.hostname,
-#                                                 bind_host.host.ip_addr,
-#                                                 ))
-#                 print("----------- END -----------")
-#             elif choice.isdigit():
-#                 choice = int(choice)
-#                 if choice < len(user.groups):
-#                     print("------ Group: %s ------" % user.groups[choice].name)
-#                     for index, bind_host in enumerate(
-#                             user.groups[choice].bind_hosts):
-#                         print("  %s.\t%s@%s(%s)" % (index,
-#                                                     bind_host.remoteuser.username,
-#                                                     bind_host.host.hostname,
-#                                                     bind_host.host.ip_addr,
-#                                                     ))
-#                     print("----------- END -----------")
-#
-#                     # host selection
-#                     while not exit_flag:
-#                         user_option = input(
-#                             "[(b)back, (q)quit, select host to login]:").strip()
-#                         if len(user_option) == 0: continue
-#                         if user_option == 'b': break
-#                         if user_option == 'q':
-#                             exit_flag = True
-#                         if user_option.isdigit():
-#                             user_option = int(user_option)
-#                             if user_option < len(
-#                                     user.groups[choice].bind_hosts):
-#                                 print('host:', user.groups[choice].bind_hosts[
-#                                     user_option])
-#                                 print('audit log:',
-#                                       user.groups[choice].bind_hosts[
-#                                           user_option].audit_logs)
-#                                 ssh_login.ssh_login(user,
-#                                                     user.groups[
-#                                                         choice].bind_hosts[
-#                                                         user_option],
-#                                                     session,
-#                                                     log_recording)
-#                 else:
-#                     print("no this option..")
+def auth():
+    '''
+    do the user login authentication
+    :return:
+    '''
+    count = 0
+    while count < 3:
+        username = input("\033[32;1mUsername:\033[0m").strip()
+        if len(username) == 0: continue
+        password = input("\033[32;1mPassword:\033[0m").strip()
+        if len(password) == 0: continue
+        user_obj = session.query(model_v2.FortressUser).filter(
+            model_v2.FortressUser.username == username,
+            model_v2.FortressUser.password == password).first()
+        if user_obj:
+            return user_obj
+        else:
+            print("wrong username or password, you have %s more chances." % (
+                3 - count - 1))
+            count += 1
+    else:
+        print_err("too many attempts.")
+
+
+def welcome_msg(user):
+    WELCOME_MSG = '''\033[32;1m
+    ------------- Welcome [%s] login fortress machine -------------
+    \033[0m''' % user.username
+    print(WELCOME_MSG)
+
+
+def start_session(argvs):
+    print('going to start sesssion ')
+    user = auth()
+    if user:
+        welcome_msg(user)
+        print(user.bind_hosts)
+        print(user.host_groups)
+        exit_flag = False
+        while not exit_flag:
+            if user.bind_hosts:
+                print('\033[32;1mz.\tungroupped hosts (%s)\033[0m' % len(
+                    user.bind_hosts))
+            for index, group in enumerate(user.host_groups):
+                print('\033[32;1m%s.\t%s (%s)\033[0m' % (
+                    index, group.name, len(group.bind_hosts)))
+
+            choice = input("[%s]:" % user.username).strip()
+            if len(choice) == 0: continue
+            if choice == 'z':
+                print("------ Group: ungroupped hosts ------")
+                for index, bind_host in enumerate(user.bind_hosts):
+                    print("  %s.\t%s@%s(%s)" % (index,
+                                                bind_host.remote_user.username,
+                                                bind_host.host.hostname,
+                                                bind_host.host.ip,
+                                                ))
+                print("----------- END -----------")
+            elif choice.isdigit():
+                choice = int(choice)
+                if choice < len(user.host_groups):
+                    print("------ Group: %s ------" % user.host_groups[choice].name)
+                    for index, bind_host in enumerate(
+                            user.host_groups[choice].bind_hosts):
+                        print("  %s.\t%s@%s(%s)" % (index,
+                                                    bind_host.remote_user.username,
+                                                    bind_host.host.hostname,
+                                                    bind_host.host.ip,
+                                                    ))
+                    print("----------- END -----------")
+
+                    # host selection
+                    # while not exit_flag:
+                    #     user_option = input(
+                    #         "[(b)back, (q)quit, select host to login]:").strip()
+                    #     if len(user_option) == 0: continue
+                    #     if user_option == 'b': break
+                    #     if user_option == 'q':
+                    #         exit_flag = True
+                    #     if user_option.isdigit():
+                    #         user_option = int(user_option)
+                    #         if user_option < len(
+                    #                 user.groups[choice].bind_hosts):
+                    #             print('host:', user.groups[choice].bind_hosts[
+                    #                 user_option])
+                    #             print('audit log:',
+                    #                   user.groups[choice].bind_hosts[
+                    #                       user_option].audit_logs)
+                    #             ssh_login.ssh_login(user,
+                    #                                 user.groups[
+                    #                                     choice].bind_hosts[
+                    #                                     user_option],
+                    #                                 session,
+                    #                                 log_recording)
+                else:
+                    print("no this option..")
