@@ -7,6 +7,7 @@ from modules.utils import yaml_parser
 from modules.db_conn import session
 from modules.db_conn import engine
 from modules import common_filters
+from modules import ssh_login
 
 
 def syncdb(argvs):
@@ -212,6 +213,18 @@ def welcome_msg(user):
     \033[0m''' % user.username
     print(WELCOME_MSG)
 
+def log_recording(user_obj,bind_host_obj,logs):
+    '''
+    flush user operations on remote host into DB
+    :param user_obj:
+    :param bind_host_obj:
+    :param logs: list format [logItem1,logItem2,...]
+    :return:
+    '''
+    print("\033[41;1m--logs:\033[0m",logs)
+
+    session.add_all(logs)
+    session.commit()
 
 def start_session(argvs):
     print('going to start sesssion ')
@@ -243,7 +256,8 @@ def start_session(argvs):
             elif choice.isdigit():
                 choice = int(choice)
                 if choice < len(user.host_groups):
-                    print("------ Group: %s ------" % user.host_groups[choice].name)
+                    print("------ Group: %s ------" % user.host_groups[
+                        choice].name)
                     for index, bind_host in enumerate(
                             user.host_groups[choice].bind_hosts):
                         print("  %s.\t%s@%s(%s)" % (index,
@@ -254,27 +268,25 @@ def start_session(argvs):
                     print("----------- END -----------")
 
                     # host selection
-                    # while not exit_flag:
-                    #     user_option = input(
-                    #         "[(b)back, (q)quit, select host to login]:").strip()
-                    #     if len(user_option) == 0: continue
-                    #     if user_option == 'b': break
-                    #     if user_option == 'q':
-                    #         exit_flag = True
-                    #     if user_option.isdigit():
-                    #         user_option = int(user_option)
-                    #         if user_option < len(
-                    #                 user.groups[choice].bind_hosts):
-                    #             print('host:', user.groups[choice].bind_hosts[
-                    #                 user_option])
-                    #             print('audit log:',
-                    #                   user.groups[choice].bind_hosts[
-                    #                       user_option].audit_logs)
-                    #             ssh_login.ssh_login(user,
-                    #                                 user.groups[
-                    #                                     choice].bind_hosts[
-                    #                                     user_option],
-                    #                                 session,
-                    #                                 log_recording)
+                    while not exit_flag:
+                        user_option = input(
+                            "[(b)back, (q)quit, select host to login]:").strip()
+                        if len(user_option) == 0: continue
+                        if user_option == 'b': break
+                        if user_option == 'q':
+                            exit_flag = True
+                        if user_option.isdigit():
+                            user_option = int(user_option)
+                            if user_option < len(
+                                    user.host_groups[choice].bind_hosts):
+                                print('host:',
+                                      user.host_groups[choice].bind_hosts[
+                                          user_option])
+                                ssh_login.ssh_login(user,
+                                                    user.host_groups[
+                                                        choice].bind_hosts[
+                                                        user_option],
+                                                    session,
+                                                    log_recording)
                 else:
                     print("no this option..")

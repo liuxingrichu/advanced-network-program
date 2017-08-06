@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from sqlalchemy import Column, Integer, String, Enum, ForeignKey, \
-    UniqueConstraint, Table
+from sqlalchemy import Column, Integer, String, ForeignKey, \
+    UniqueConstraint, Table, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from sqlalchemy_utils import ChoiceType, PasswordType
+from sqlalchemy_utils import ChoiceType
 
 Base = declarative_base()
 
@@ -86,9 +86,9 @@ class RemoteUser(Base):
         ('ssh-type', 'SSH/KEY'),
     ]
     # 联合唯一的数据内容必须为非空
-    auth_type = Column(String(64), ChoiceType(AuthTypes),nullable=False)
+    auth_type = Column(String(64), ChoiceType(AuthTypes), nullable=False)
     username = Column(String(64), nullable=False)
-    password = Column(String(128),nullable=False)
+    password = Column(String(128), nullable=False)
 
     def __repr__(self):
         return self.username
@@ -107,5 +107,20 @@ class FortressUser(Base):
     def __repr__(self):
         return self.username
 
-# class AuditLog(Base):
-#     pass
+
+class AuditLog(Base):
+    __tablename__ = 'audit_log'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('fortress_user.id'))
+    bind_host_id = Column(Integer, ForeignKey('bind_host.id'))
+    action_choices = [
+        (u'cmd', u'CMD'),
+        (u'login', u'Login'),
+        (u'logout', u'Logout'),
+    ]
+    action_type = Column(ChoiceType(action_choices))
+    cmd = Column(String(255))
+    date = Column(DateTime)
+
+    fortress_user = relationship("FortressUser")
+    bind_host = relationship("BindHost")
